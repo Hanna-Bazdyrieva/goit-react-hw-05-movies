@@ -5,7 +5,7 @@ import {List, Link} from './Home.styled'
 
 const Home = params => {
   const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   
   const changeMovies = async () => {
     // setIsLoading(true);
@@ -32,9 +32,10 @@ const Home = params => {
     } catch (error) {
       // setError(error.message);
       console.log(error)
-    } finally {
-      setIsLoading(false);
-    }
+    } 
+    // finally {
+    //   setIsLoading(false);
+    // }
   };
 
   useEffect(() => {
