@@ -25,7 +25,7 @@ const SharedLayout = () => {
         {'    '}
             Home
           </Link>
-          <Link to="/about">
+          <Link to="/movies">
           <IconContext.Provider value={{size: "30px", style: { verticalAlign: 'middle', padding:'2px 5px' } }}>
         <ImFilm/> 
       </IconContext.Provider>

@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home';
-import Movies from '../pages/Movies';
-import MovieDetails from '../pages/MovieDetails';
-import Reviews from '../pages/Reviews';
-import Cast from '../pages/Cast';
+import Home from 'pages/HomePage';
+import Movies from 'pages/MoviesPage';
+import MovieDetails from 'pages/MovieDetailsPage';
+import Reviews from '../pages/ReviewsPage';
+import Cast from 'pages/CastPage';
 import SharedLayout from '../components/SharedLayout';
 
 

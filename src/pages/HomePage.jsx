@@ -1,7 +1,7 @@
-import {getTrendingdMoviesApi} from '../../service/movieAPI'
+import {getTrendingdMoviesApi} from '../service/movieAPI'
 import { useEffect, useState } from 'react';
-import {List, Link} from './Home.styled'
-
+import { LinkStyled, List } from 'components/HomeLink/HomeLink.styled';
+import { Title, Container } from 'components/MovieDetailsCard/MovieDetailsCard.styled';
 
 const Home = params => {
   const [movies, setMovies] = useState([]);
@@ -14,45 +14,32 @@ const Home = params => {
 
     try {
       const data = await getTrendingdMoviesApi();
-
-      console.log(data.results)
-
       if (data.results.length === 0) {
         throw new Error('OOPS... We found nothing... Sorry..');
       }
 
-      // const lastPage = Math.ceil(data.totalHits / 12);
+     setMovies([...data.results])
 
-      // if (lastPage === page) {
-      //   setIsLastPage(true);
-      // }
-      setMovies([...data.results])
-
-      // page === 1 ? setImages(data.hits) : setImages([...images, ...data.hits]);
     } catch (error) {
       // setError(error.message);
       console.log(error)
     } 
-    // finally {
-    //   setIsLoading(false);
-    // }
   };
 
   useEffect(() => {
     changeMovies()
   
  }, []);
-// console.log(changeMovies())
   return (
     <>
-      <div>
+      <Container>
       {/* {isLoading && <h2>Loading</h2>} */}
-        <h1>Today's Trends</h1>
+        <Title>Today's Trends</Title>
         <List>
-          {movies.map(({title, id})=> <li key={id}><Link href="#">{title}</Link></li>)}
+          {movies.map(({title, id})=> <LinkStyled key={id} to={`movies/${id}`} >{title}</LinkStyled>)}
           
           </List>
-      </div>
+      </Container>
     </>
   );
 };

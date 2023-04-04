@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-// import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export const List  = styled.ul`
+export const List  = styled.div`
 list-style: none;
   padding: ${p => p.theme.space[3]}px ${p => p.theme.space[5]}px;
 
   
 `;
 
-export const Link = styled.a`
-
+export const LinkStyled = styled(Link)`
+display: block;
   text-decoration: none;
   color: ${p => p.theme.colors.black};
   font-size: ${p => p.theme.fontSizes.m};
@@ -22,12 +22,8 @@ export const Link = styled.a`
     background-color: ${p => p.theme.colors.orange};
   }
 
-  :hover:not(.active) {
+  :hover{
     color: ${p => p.theme.colors.orange};
     text-decoration: underline;
-  }
-  /* :visited {
-    color: ${p => p.theme.colors.visited}; */
-
   }
 `;

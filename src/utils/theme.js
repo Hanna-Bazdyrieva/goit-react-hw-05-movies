@@ -55,7 +55,7 @@ const theme = {
     hover: 'rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px',
     inner: '0px 0px 7px 4px rgba(45,55,44,0.63) inset',
     max: '0px 0px 15px 13px rgba(0,0,0,0.65)',
-  },
+    white: '0px 0px 21px 6px rgba(255,255,255,0.93)'},
   transitions: {
     ease: '300ms ease',
     cubic: '300ms cubic-bezier(0.4, 0, 0.2, 1)',
