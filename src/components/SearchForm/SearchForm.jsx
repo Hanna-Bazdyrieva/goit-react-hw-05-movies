@@ -12,7 +12,7 @@ import { useSearchParams } from 'react-router-dom';
 
 const SearchForm = () => {
   const [input, setInput] = useState('');
-  const [searchParams, setSearchParams] = useSearchParams(); 
+  const [, setSearchParams] = useSearchParams(); 
 
   const handleInput = e => {
     setInput(e.target.value);
