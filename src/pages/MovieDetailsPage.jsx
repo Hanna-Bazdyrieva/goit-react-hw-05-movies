@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { getMovieDetailsApi } from 'service/movieAPI';
 import MovieDetailsCard from 'components/MovieDetailsCard/MovieDetailsCard';
+import Loader from 'components/Loader/Loader';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -22,9 +23,9 @@ const MovieDetails = () => {
         <div>
           <MovieDetailsCard movie={movie} />
 
-         
-
-          <Outlet />
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
         </div>
       )}
     </div>

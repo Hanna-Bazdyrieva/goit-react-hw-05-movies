@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 export const Container = styled.div`
   max-width: ${p => p.theme.sizes[3]}px;
@@ -8,11 +8,38 @@ export const Container = styled.div`
   border-bottom: ${p => p.theme.borders.normal};
   
 `;
+
 export const Wrapper = styled(Container)`
 display flex;
 border-bottom: ${p => p.theme.borders.normal};
 
   
+`;
+
+export const LinkBack = styled(Link)`
+display : block;
+margin : ${p => p.theme.space[3]}px ${p => p.theme.space[3]}px;
+  padding: ${p => p.theme.space[3]}px ${p => p.theme.space[5]}px;
+width: 40px;
+
+text-align: center;
+  text-decoration: none;
+  font-size: ${p => p.theme.fontSizes.m};
+  font-weight: ${p => p.theme.fontWeights.bold};
+
+  color: ${p => p.theme.colors.black};
+  border-radius: ${p => p.theme.radii.normal};
+  background-color: ${p => p.theme.colors.lightOrange};
+
+  &.active {
+    color: ${p => p.theme.colors.white};
+    background-color: ${p => p.theme.colors.orange};
+  }
+
+  :hover:not(.active) {
+    color: ${p => p.theme.colors.white};
+    background-color: ${p => p.theme.colors.orange};
+  }
 `;
 
 export const Image = styled.img`
@@ -77,7 +104,7 @@ export const Logo = styled.p`
   border-radius: ${p => p.theme.radii.normal};
 `;
 
-export const Link = styled(NavLink)`
+export const LinkNav = styled(NavLink)`
   padding: ${p => p.theme.space[3]}px ${p => p.theme.space[5]}px;
 
   border-radius: ${p => p.theme.radii.normal};

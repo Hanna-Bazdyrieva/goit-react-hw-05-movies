@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const API_KEY = '3fa79295b2db659311fd6571a0276ef1';
 
 export const getTrendingdMoviesApi = () => {
@@ -15,7 +15,7 @@ export const getTrendingdMoviesApi = () => {
 
 export const getMovieSearchApi = query => {
   return axios
-    .get('search/movie', {
+    .get('/search/movie', {
       params: {
         query,
         api_key: API_KEY,
@@ -26,7 +26,7 @@ export const getMovieSearchApi = query => {
 
 export const getMovieDetailsApi = id => {
   return axios
-    .get(`movie/${id}`, {
+    .get(`/movie/${id}`, {
       params: {
         api_key: API_KEY,
       },
@@ -36,7 +36,7 @@ export const getMovieDetailsApi = id => {
 
 export const getMovieCastApi = id => {
     return axios
-      .get(`movie/${id}/credits`, {
+      .get(`/movie/${id}/credits`, {
         params: {
           api_key: API_KEY,
         },
@@ -46,7 +46,7 @@ export const getMovieCastApi = id => {
 
   export const getMovieReviewsApi = id => {
     return axios
-      .get(`movie/${id}/reviews`, {
+      .get(`/movie/${id}/reviews`, {
         params: {
           api_key: API_KEY,
         },

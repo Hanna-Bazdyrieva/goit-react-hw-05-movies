@@ -1,49 +1,39 @@
-import {
-  Title,
-  StyledBar,
-  SearchForm,
-  SearchInput,
-  ButtonSearch,
-} from 'components/MoviesSearch/MoviesSearch.styled';
-import { GoSearch } from 'react-icons/go';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import SearchForm from '../components/SearchForm';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { getMovieSearchApi } from 'service/movieAPI';
+import MovieList from '../components/MovieList';
+import ErrorStyled from '../components/ErrorStyled';
 
-const Movies = params => {
-  const [input, setInput] = useState('');
+const Movies = () => {
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState('');
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
 
-  const handleInput = e => {
-    setInput(e.target.value);
-  };
+  const query = searchParams.get('query');
 
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   onSubmit(input);
-  // };
+  useEffect(() => {
+    setMovies([])
+    setError('')
+    if (!query) return;
+    
+    getMovieSearchApi(query)
+      .then(data => {
+        if (data.results.length === 0) {
+          throw new Error('OOPS... Nothing Found... Sorry..');
+        }
+        setMovies(data.results);
+      })
+      .catch(error => setError(error.message));
+  }, [query, searchParams]);
+
   return (
     <>
       <div>
-        {/* <SearchForm></SearchForm>
-      <Movielist></Movielist> */}
-        <Title>Movies Search</Title>
-        <StyledBar>
-          <SearchForm
-          //  onSubmit={handleSubmit}
-          >
-            <ButtonSearch type="submit">
-              {/* <ButtonLabel class="button-label"> */}
-              <GoSearch />
-              {/* </ButtonLabel> */}
-            </ButtonSearch>
-            <SearchInput
-              type="text"
-              autocomplete="off"
-              value={input}
-              autoFocus
-              placeholder="Search movie"
-              onChange={handleInput}
-            />
-          </SearchForm>
-        </StyledBar>
+        <SearchForm />
+        {error && <ErrorStyled>{error}</ErrorStyled>}
+        {query && <MovieList movies={movies} location={location} />}
       </div>
     </>
   );

@@ -1,47 +1,44 @@
-import {getTrendingdMoviesApi} from '../service/movieAPI'
+import { getTrendingdMoviesApi } from '../service/movieAPI';
 import { useEffect, useState } from 'react';
-import { LinkStyled, List } from 'components/HomeLink/HomeLink.styled';
-import { Title, Container } from 'components/MovieDetailsCard/MovieDetailsCard.styled';
+import MovieList from '../components/MovieList';
+import Container from '../components/Container';
+import { useLocation } from 'react-router-dom';
+import ErrorStyled from '../components/ErrorStyled'
 
 const Home = params => {
   const [movies, setMovies] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  
-  const changeMovies = async () => {
-    // setIsLoading(true);
-    // setError(null);
-    // setIsLastPage(false);
+  const [error, setError] = useState('');
+  const location = useLocation();
 
+  const changeMovies = async () => {
     try {
       const data = await getTrendingdMoviesApi();
       if (data.results.length === 0) {
         throw new Error('OOPS... We found nothing... Sorry..');
       }
-
-     setMovies([...data.results])
-
-    } catch (error) {
-      // setError(error.message);
-      console.log(error)
-    } 
+      setMovies([...data.results]);
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   useEffect(() => {
-    changeMovies()
-  
- }, []);
+    changeMovies();
+  }, []);
+
   return (
     <>
       <Container>
-      {/* {isLoading && <h2>Loading</h2>} */}
-        <Title>Today's Trends</Title>
-        <List>
-          {movies.map(({title, id})=> <LinkStyled key={id} to={`movies/${id}`} >{title}</LinkStyled>)}
-          
-          </List>
+        {error && <ErrorStyled>{error}</ErrorStyled>}
+        <MovieList
+          title="Today's Trends"
+          movies={movies}
+          needMovies={true}
+          location={location}
+        />
       </Container>
     </>
   );
 };
 
-export default Home
+export default Home;

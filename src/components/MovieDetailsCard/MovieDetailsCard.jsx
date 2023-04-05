@@ -5,14 +5,21 @@ import {
   SubTitle,
   Title,
   Text,
-  Link,
+  LinkNav,
   SubHeader,
   Image,
+  LinkBack,
 } from './MovieDetailsCard.styled';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Box from 'components/Box/Box';
+import { useLocation } from 'react-router-dom';
+import { IoMdArrowRoundBack } from 'react-icons/io';
+import { IconContext } from 'react-icons';
 
 const MovieDetailsCard = ({ movie }) => {
+  const location = useLocation();
+  const savedNavigate = useRef(location.state?.from);
+
   const [film, setFilm] = useState(movie);
   useEffect(() => {
     setFilm({ ...movie });
@@ -20,6 +27,19 @@ const MovieDetailsCard = ({ movie }) => {
 
   return (
     <>
+      <LinkBack
+        to={savedNavigate.current ?? '/movies'}
+        state={{ from: location }}
+      >
+        <IconContext.Provider
+          value={{
+            size: '30px',
+            style: { verticalAlign: 'middle', padding: '2px 5px' },
+          }}
+        >
+          <IoMdArrowRoundBack />
+        </IconContext.Provider>
+      </LinkBack>
       <Wrapper>
         <Image
           src={
@@ -49,8 +69,8 @@ const MovieDetailsCard = ({ movie }) => {
 
       <Container>
         <SubHeader>Additional Information</SubHeader>
-        <Link to="cast">CAST</Link>
-        <Link to="reviews">REVIEWS</Link>
+        <LinkNav to="cast">CAST</LinkNav>
+        <LinkNav to="reviews">REVIEWS</LinkNav>
       </Container>
     </>
   );
